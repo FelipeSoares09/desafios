@@ -1,2 +1,0 @@
-# desafios
-Desafios em ReactJS
