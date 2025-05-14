@@ -4,29 +4,35 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
 export function Header() {
     return (
-        <div>
+        <div className="header">
             <img src="../src/assets/Logo.svg" alt="" />
         </div>
     )
 }
 
-export function PersonalInfo() {
+export function GitInfo() {
     return (
-        <div>
-            <img src="https://github.com/FelipeSoares09.png" alt="" />
-            <h1>Felipe Soares</h1>
-            <p>Student of Analysis and Systems Development and Front-End intern</p>
-            <div>
-                <FontAwesomeIcon icon={faBuilding} />
-                <span>Talk2Buy</span>
-            </div>
-            <div>
-                <FontAwesomeIcon icon={faGithub} />
-                <span>FelipeSoares09</span>
-            </div>
-            <div>
-                <FontAwesomeIcon icon={faUserGroup} />
-                <span>14</span>
+        <div className="personal-info">
+            <div className="data">
+                <img src="https://github.com/FelipeSoares09.png" alt="" />
+                <div className="name">
+                    <h1>Felipe Soares</h1>
+                    <p>Student of Analysis and Systems Development and Front-End intern</p>
+                    <aside>
+                        <div>
+                            <FontAwesomeIcon icon={faGithub} style={{ color: 'var(--blue-200)' }} />
+                            <span>FelipeSoares09</span>
+                        </div>
+                        <div>
+                            <FontAwesomeIcon icon={faBuilding} style={{ color: 'var(--blue-200)' }} />
+                            <span>Talk2Buy</span>
+                        </div>
+                        <div>
+                            <FontAwesomeIcon icon={faUserGroup} style={{ color: 'var(--blue-200)' }} />
+                            <span>14 seguidores</span>
+                        </div>
+                    </aside>
+                </div>
             </div>
         </div>
     )
@@ -35,10 +41,13 @@ export function PersonalInfo() {
 export function Search() {
     return (
         <div>
-            <h1>Publicações</h1>
-            <span>2 publicações</span>
+            <div className="filter">
+                <span style={{ color: 'var(--grey-200)' }}>Publicações</span>
 
-            <div>
+                <span style={{ color: 'var(--blue-100)' }}>6 publicações</span>
+            </div>
+
+            <div className="text-input">
                 <input type="text" placeholder="Buscar conteúdo" />
             </div>
         </div>
@@ -48,9 +57,38 @@ export function Search() {
 export function Post() {
     return (
         <section>
-            <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam nam saepe rem laboriosam molestias quidem accusamus tenetur possimus inventore ipsum incidunt labore accusantium quisquam reiciendis dicta quas distinctio, cumque quasi.</div>
-            <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates, cumque. Similique magni provident porro quis id impedit maiores expedita dolorum eos consequatur cumque rerum mollitia necessitatibus, nobis minima quae itaque.</div>
+            <div className="posts-line-1">
+                <div>
+                    <h1>Publicação 1</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam nam saepe rem laboriosam molestias quidem accusamus tenetur possimus inventore ipsum incidunt labore accusantium quisquam reiciendis dicta quas distinctio, cumque quasi.</p>
+                </div>
+                <div>
+                    <h1>Publicação 2</h1>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates, cumque. Similique magni provident porro quis id impedit maiores expedita dolorum eos consequatur cumque rerum mollitia necessitatibus, nobis minima quae itaque.</p>
+                </div>
+            </div>
+            <div className="posts-line-2">
+               <div>
+                    <h1>Publicação 3</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam nam saepe rem laboriosam molestias quidem accusamus tenetur possimus inventore ipsum incidunt labore accusantium quisquam reiciendis dicta quas distinctio, cumque quasi.</p>
+                </div>
+                <div>
+                    <h1>Publicação 4</h1>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates, cumque. Similique magni provident porro quis id impedit maiores expedita dolorum eos consequatur cumque rerum mollitia necessitatibus, nobis minima quae itaque.</p>
+                </div> 
+            </div>
+            <div className="posts-line-3">
+                <div>
+                    <h1>Publicação 5</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam nam saepe rem laboriosam molestias quidem accusamus tenetur possimus inventore ipsum incidunt labore accusantium quisquam reiciendis dicta quas distinctio, cumque quasi.</p>
+                </div>
+                <div>
+                    <h1>Publicação 6</h1>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates, cumque. Similique magni provident porro quis id impedit maiores expedita dolorum eos consequatur cumque rerum mollitia necessitatibus, nobis minima quae itaque.</p>
+                </div> 
+            </div>
         </section>
+        
     )
 }
 
@@ -59,7 +97,7 @@ export function Home() {
     return (
         <>
             <Header />
-            <PersonalInfo />
+            <GitInfo />
             <Search />
             <Post />
         </>
