@@ -1,8 +1,9 @@
-
+import './global.css'
+import { Home } from './Home'
 
 export function App() {
   return (
-    <h1>Hello World</h1>
+    <Home />
   )
 }
 
