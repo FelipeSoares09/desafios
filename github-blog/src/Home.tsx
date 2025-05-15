@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBuilding, faUserGroup } from '@fortawesome/free-solid-svg-icons'
+import { faArrowUpRightFromSquare, faBuilding, faUserGroup } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { useEffect, useState } from 'react'
 import { fetchIssues } from './axios/issues'
@@ -37,6 +37,14 @@ export function GitInfo() {
 
     return (
         <div className="personal-info">
+            <span>
+                <a href="https://github.com/FelipeSoares09"
+                target="_blank"
+                rel="noopener noreferrer"
+                >GITHUB</a>
+                <FontAwesomeIcon icon={faArrowUpRightFromSquare} style={{ color: 'var(--blue)' }} />
+                </span>
+                
             <div className="data">
                 <img src="https://github.com/FelipeSoares09.png" alt="" />
                 <div className="name">
@@ -53,7 +61,7 @@ export function GitInfo() {
                         </div>
                         <div>
                             <FontAwesomeIcon icon={faUserGroup} style={{ color: 'var(--blue-200)' }} />
-                            <span>{user.followers} seguidores</span>
+                            <span>{user.followers} followers</span>
                         </div>
                     </aside>
                 </div>
@@ -68,7 +76,7 @@ export function Search() {
             <div className="filter">
                 <span style={{ color: 'var(--grey-200)' }}>Publicações</span>
 
-                <span style={{ color: 'var(--blue-100)' }}>6 publicações</span>
+                <span style={{ color: 'var(--blue-100)' }}>2 publicações</span>
             </div>
 
             <div className="text-input">

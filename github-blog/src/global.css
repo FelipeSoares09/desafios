@@ -69,8 +69,22 @@ body, input, textarea, button {
     background: var(--blue-500);
     width: 50vw;
     height: 25vh;
+    position: relative;
 }
 
+.personal-info > span {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 11px;
+    display: flex;
+    gap: 5px;
+}
+
+.personal-info > span > a {
+    text-decoration: none;
+    color: var(--blue);
+}
 .data {
     display: flex;
     gap: 20px;
@@ -129,6 +143,10 @@ input {
     color: var(--grey-200);
     cursor: text;
     padding-left: 10px;
+}
+
+input:focus {
+    border: 1px solid var(--blue);
 }
 
 .text-input {
