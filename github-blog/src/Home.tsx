@@ -1,6 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBuilding, faUserGroup } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
+import { useEffect, useState } from 'react'
+import { fetchIssues } from './axios/issues'
 
 export function Header() {
     return (
@@ -11,25 +13,47 @@ export function Header() {
 }
 
 export function GitInfo() {
+    const [user, setUser] = useState({
+        name: '',
+        bio: '',
+        login: '',
+        followers: 0,
+        company: ''
+    })
+
+    useEffect(() => {
+        fetch('https://api.github.com/users/FelipeSoares09')
+            .then(response => response.json())
+            .then(data => {
+                setUser({
+                    name: data.name,
+                    bio: data.bio,
+                    login: data.login,
+                    followers: data.followers,
+                    company: data.company
+                })
+            })
+    }, [])
+
     return (
         <div className="personal-info">
             <div className="data">
                 <img src="https://github.com/FelipeSoares09.png" alt="" />
                 <div className="name">
                     <h1>Felipe Soares</h1>
-                    <p>Student of Analysis and Systems Development and Front-End intern</p>
+                    <p>{user.bio}</p>
                     <aside>
                         <div>
                             <FontAwesomeIcon icon={faGithub} style={{ color: 'var(--blue-200)' }} />
-                            <span>FelipeSoares09</span>
+                            <span>{user.login}</span>
                         </div>
                         <div>
                             <FontAwesomeIcon icon={faBuilding} style={{ color: 'var(--blue-200)' }} />
-                            <span>Talk2Buy</span>
+                            <span>{user.company}</span>
                         </div>
                         <div>
                             <FontAwesomeIcon icon={faUserGroup} style={{ color: 'var(--blue-200)' }} />
-                            <span>14 seguidores</span>
+                            <span>{user.followers} seguidores</span>
                         </div>
                     </aside>
                 </div>
@@ -54,52 +78,44 @@ export function Search() {
     )
 }
 
-export function Post() {
+export function Post({ issues }: { issues: any[] }) {
     return (
         <section>
             <div className="posts-line-1">
-                <div>
-                    <h1>Publicação 1</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam nam saepe rem laboriosam molestias quidem accusamus tenetur possimus inventore ipsum incidunt labore accusantium quisquam reiciendis dicta quas distinctio, cumque quasi.</p>
-                </div>
-                <div>
-                    <h1>Publicação 2</h1>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates, cumque. Similique magni provident porro quis id impedit maiores expedita dolorum eos consequatur cumque rerum mollitia necessitatibus, nobis minima quae itaque.</p>
-                </div>
-            </div>
-            <div className="posts-line-2">
-               <div>
-                    <h1>Publicação 3</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam nam saepe rem laboriosam molestias quidem accusamus tenetur possimus inventore ipsum incidunt labore accusantium quisquam reiciendis dicta quas distinctio, cumque quasi.</p>
-                </div>
-                <div>
-                    <h1>Publicação 4</h1>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates, cumque. Similique magni provident porro quis id impedit maiores expedita dolorum eos consequatur cumque rerum mollitia necessitatibus, nobis minima quae itaque.</p>
-                </div> 
-            </div>
-            <div className="posts-line-3">
-                <div>
-                    <h1>Publicação 5</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam nam saepe rem laboriosam molestias quidem accusamus tenetur possimus inventore ipsum incidunt labore accusantium quisquam reiciendis dicta quas distinctio, cumque quasi.</p>
-                </div>
-                <div>
-                    <h1>Publicação 6</h1>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates, cumque. Similique magni provident porro quis id impedit maiores expedita dolorum eos consequatur cumque rerum mollitia necessitatibus, nobis minima quae itaque.</p>
-                </div> 
+                {issues.map((issue) => {
+                    const preview = issue.body.length > 250
+                        ? issue.body.slice(0, 250) + '...' // Limita a 250 caracteres e adiciona "..."
+                        : issue.body; // Exibe o texto completo se for menor que 250 caracteres
+
+                    return (
+                        <div key={issue.id}>
+                            <h1>{issue.title}</h1>
+                            <p>{preview}</p>
+                        </div>
+                    );
+                })}
             </div>
         </section>
-        
-    )
+    );
 }
 
-
 export function Home() {
+    const [issues, setIssues] = useState([]); // Estado para armazenar as issues
+
+    useEffect(() => {
+        async function loadIssues() {
+            const data = await fetchIssues(); // Busca as issues
+            setIssues(data); // Atualiza o estado com as issues
+        }
+        loadIssues();
+    }, []);
+
     return (
         <>
             <Header />
             <GitInfo />
             <Search />
-            <Post />
+            <Post issues={issues} /> {/* Passa as issues como props */}
         </>
-    )
+    );
 }

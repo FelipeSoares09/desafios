@@ -56,23 +56,27 @@ body, input, textarea, button {
 .header > img {
     width: 120px;
     height: 120px;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 .personal-info {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     margin-top: -70px;
     border: 2px solid var(--blue-500);
-    padding: 30px;
     border-radius: 8px;
     background: var(--blue-500);
     width: 50vw;
+    height: 25vh;
 }
 
 .data {
     display: flex;
     gap: 20px;
+    justify-content: center;
+    width: 50vw;
+    height: auto;
 }
 
 
@@ -80,6 +84,7 @@ body, input, textarea, button {
     width: 130px;
     height: 130px;
     border-radius: 8px;
+    object-fit: cover;
 }
 
 .name {
@@ -99,7 +104,7 @@ body, input, textarea, button {
 
 aside {
     display: flex;
-    margin-top: 20px;
+    margin-top: 30px;
     font-size: 14px;
     gap: 20px;
 }
@@ -172,7 +177,7 @@ input::placeholder {
     text-align: justify;
 }
 
-.posts-line-2 {
+/* .posts-line-2 {
     display: flex;
     flex-direction: wrap;
     justify-content: space-between;
@@ -228,4 +233,4 @@ input::placeholder {
 
 .posts-line-3 > div > p {
     text-align: justify;
-}
+} */
