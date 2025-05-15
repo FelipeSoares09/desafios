@@ -3,6 +3,8 @@ import { faArrowUpRightFromSquare, faBuilding, faUserGroup } from '@fortawesome/
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { useEffect, useState } from 'react'
 import { fetchIssues } from './axios/issues'
+import { formatDistanceToNow } from 'date-fns';
+import { ptBR } from 'date-fns/locale'; // Importa o idioma português (opcional)
 
 export function Header() {
     return (
@@ -92,13 +94,23 @@ export function Post({ issues }: { issues: any[] }) {
             <div className="posts-line-1">
                 {issues.map((issue) => {
                     const preview = issue.body.length > 250
-                        ? issue.body.slice(0, 250) + '...' // Limita a 250 caracteres e adiciona "..."
-                        : issue.body; // Exibe o texto completo se for menor que 250 caracteres
+                        ? issue.body.slice(0, 250) + '...'
+                        : issue.body;
+
+                    const rawtimeAgo = formatDistanceToNow(new Date(issue.created_at), {
+                        addSuffix: true,
+                        locale: ptBR,
+                    });
+
+                    const timeAgo = rawtimeAgo.charAt(0).toUpperCase() + rawtimeAgo.slice(1);
 
                     return (
                         <div key={issue.id}>
                             <h1>{issue.title}</h1>
                             <p>{preview}</p>
+                            <span style={{ color: 'var(--grey-200)', fontSize: '12px' }}>
+                            {timeAgo}
+                            </span>
                         </div>
                     );
                 })}
