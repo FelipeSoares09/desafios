@@ -37,11 +37,7 @@ export function GitInfo() {
     })
 
     useEffect(() => {
-        fetch('https://api.github.com/users/FelipeSoares09', {
-            headers: {
-                    Authorization: 'Bearer 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'
-                }
-        })
+        fetch('https://api.github.com/users/FelipeSoares09')
             .then(response => response.json())
             .then(data => {
                 setUser({
