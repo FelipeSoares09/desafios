@@ -1,0 +1,160 @@
+:root {
+        --blue-800: #040F1A;
+        --blue-700: #071422;
+        --blue-500: #0B1B2B;
+        --blue-400: #112131;
+        --blue-300: #1C2F41;
+        --blue-200: #3A536B;
+        --blue-100: #7B96B2;
+
+
+        --blue: #3294F8;
+
+        --white: #E7EDF4;
+
+        --grey-200: #C4D4E3;
+        --grey-300: #AFC2D4;
+}
+
+:focus {
+    outline: transparent;
+    box-shadow: 0 0 0 2px var(--blue-500);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 200vh;
+
+    background: var(--blue-700);
+    -webkit-font-smoothing: antialiased;
+    
+}
+
+body, input, textarea, button {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.header {
+    width: 100%;
+    height: 30vh;
+    background: var(--blue-400);
+    display: flex;
+    justify-content: center;
+}
+
+.header > img {
+    width: 120px;
+    height: 120px;
+    margin-top: 15px;
+}
+
+.post-personal-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 32px 40px;
+    margin-top: -60px;
+    border: none;
+    border-radius: 10px;
+    background: var(--blue-500);
+    width: 100%;
+    max-width: 860px;
+    min-height: 180px;
+    position: relative;
+    box-shadow: 0 2px 28px rgba(0,0,0,0.2);
+    margin-left: auto;
+    margin-right: auto;
+    gap: 24px;
+}
+
+.post-personal-info > span > a {
+    text-decoration: none;
+    color: var(--blue);
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.post-personal-info > .span1 {
+    position: absolute;
+    top: 10px;
+    left: 40px;
+    gap: 5px;
+    display: flex;
+}
+.post-personal-info > .span1:hover {
+    border-bottom: 1px solid var(--blue);
+    cursor: pointer;
+}
+.post-personal-info > .span2 {
+    position: absolute;
+    top: 5px;
+    right: 40px;
+    gap: 5px;
+    display: flex;
+}
+.post-personal-info > .span2:hover {
+    border-bottom: 1px solid var(--blue);
+    cursor: pointer;
+}
+
+.post-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.post-name > h1 {
+    font-size: 20px;
+    color: var(--grey-200);
+}
+
+.post-name > p {
+    color: var(--grey-200);
+}
+
+aside {
+    display: flex;
+    margin-top: 30px;
+    font-size: 14px;
+    gap: 20px;
+}
+
+aside > div {
+    display: flex;
+    gap: 10px;
+}
+
+aside > div > span {
+    color: var(--blue-200);
+}
+
+.post-content {
+    width: 100%;
+    max-width: 860px;
+    min-height: 200px;
+    overflow-y: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 32px 40px;
+    color: var(--white);
+    margin-top: 20px;
+}
+
+.post-content p {
+    margin-bottom: 16px; /* ajuste o valor conforme desejar */
+    line-height: 1.7;
+    text-align: justify;
+}

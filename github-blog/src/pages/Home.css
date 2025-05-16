@@ -29,14 +29,13 @@
 
 
 body > div {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 200vh;
-
     background: var(--blue-700);
     -webkit-font-smoothing: antialiased;
-    
 }
 
 body, input, textarea, button {
@@ -63,69 +62,83 @@ body, input, textarea, button {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: -70px;
-    border: 2px solid var(--blue-500);
-    border-radius: 8px;
+    align-items: center;
+    padding: 32px 40px;
+    margin-top: -60px;
+    border: none;
+    border-radius: 10px;
     background: var(--blue-500);
-    width: 50vw;
-    height: 25vh;
+    width: 100%;
+    max-width: 860px;
+    min-height: 180px;
     position: relative;
+    box-shadow: 0 2px 28px rgba(0,0,0,0.2);
 }
 
 .personal-info > span {
     position: absolute;
-    top: 30px;
-    right: 30px;
-    font-size: 11px;
+    top: 32px;
+    right: 40px;
+    font-size: 13px;
     display: flex;
-    gap: 5px;
+    align-items: center;
+    gap: 6px;
 }
 
 .personal-info > span > a {
     text-decoration: none;
     color: var(--blue);
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 .data {
     display: flex;
-    gap: 20px;
-    justify-content: center;
-    width: 50vw;
+    align-items: center;
+    gap: 32px;
+    width: 100%;
     height: auto;
+    position: static;
 }
 
 
 .data > img {
-    width: 130px;
-    height: 130px;
+    width: 148px;
+    height: 148px;
     border-radius: 8px;
     object-fit: cover;
+    position: static;
 }
 
 .name {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 8px;
 }
 
 .name > h1 {
-    font-size: 20px;
-    color: var(--grey-200);
+    font-size: 24px;
+    color: var(--white);
+    font-weight: 700;
 }
 
 .name > p {
     color: var(--grey-200);
+    font-size: 16px;
+    margin-bottom: 16px;
 }
 
 aside {
     display: flex;
-    margin-top: 30px;
-    font-size: 14px;
-    gap: 20px;
+    gap: 24px;
+    margin-top: 16px;
+    font-size: 16px;
 }
 
 aside > div {
     display: flex;
-    gap: 10px;
+    align-items: center;
+    gap: 8px;
+    color: var(--grey-200);
 }
 
 aside > div > span {
@@ -134,7 +147,7 @@ aside > div > span {
 
 
 input {
-    width: 50vw;
+    width: 100%;
     height: 35px;
     margin-top: 10px;
     background: var(--blue-800);
@@ -150,7 +163,15 @@ input:focus {
 }
 
 .text-input {
-    width: 50vw;
+    width: 100%;
+    max-width: 860px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.text-input input {
+    width: 100%;
+    box-sizing: border-box;
 }
 
 input::placeholder {
@@ -163,7 +184,10 @@ input::placeholder {
     justify-content: space-between;
     color: var(--grey-200);
     margin-top: 50px;
-    width: 50vw;
+    width: 100%;
+    max-width: 860px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .posts-line-1 {
@@ -171,7 +195,10 @@ input::placeholder {
     flex-direction: wrap;
     justify-content: space-between;
     gap: 15px;
-    width: 50vw;
+    width: 100%;
+    max-width: 860px;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 50px;
     color: var(--grey-300);
 }
@@ -187,10 +214,21 @@ input::placeholder {
     position: relative;
 }
 
+.posts-line-1 > div:focus {
+    border: 1px solid var(--blue-300);
+}
+
+.posts-line-1 > div:hover {
+    background: var(--blue-300);
+    transition: 0.5s;
+    border: 1px solid var(--blue-300);
+}
+
 .posts-line-1 > div > h1 {
     font-size: 18px;
     color: var(--grey-200);
-    padding-right: 50px
+    padding-right: 60px;
+    align-items: right;
 }
 
 .posts-line-1 > div > p {
@@ -200,7 +238,7 @@ input::placeholder {
 .posts-line-1 > div > span {
     position: absolute;
     top: 20px;
-    right: 20px;
+    right: 15px;
 }
 
 

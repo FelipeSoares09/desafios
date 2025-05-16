@@ -2,9 +2,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowUpRightFromSquare, faBuilding, faUserGroup } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { useEffect, useState } from 'react'
-import { fetchIssues } from './axios/issues'
+import { fetchIssues } from '../axios/issues'
 import { formatDistanceToNow } from 'date-fns';
-import { ptBR } from 'date-fns/locale'; // Importa o idioma português (opcional)
+import { ptBR } from 'date-fns/locale';
+import { useNavigate } from 'react-router-dom';
+import './Home.css'
+
+type Issue = {
+    id: number;
+    number: number;
+    title: string;
+    body: string;
+    user: { login: string };
+    labels: { name: string }[];
+    created_at: string;
+    // adicione outros campos se necessário
+};
 
 export function Header() {
     return (
@@ -24,7 +37,11 @@ export function GitInfo() {
     })
 
     useEffect(() => {
-        fetch('https://api.github.com/users/FelipeSoares09')
+        fetch('https://api.github.com/users/FelipeSoares09', {
+            headers: {
+                    Authorization: 'Bearer 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'
+                }
+        })
             .then(response => response.json())
             .then(data => {
                 setUser({
@@ -72,23 +89,28 @@ export function GitInfo() {
     )
 }
 
-export function Search() {
+export function Search({ total, search, setSearch }: { total: number, search: string, setSearch: (value: string) => void }) {
     return (
-        <div>
+        <div className="text-input">
             <div className="filter">
                 <span style={{ color: 'var(--grey-200)' }}>Publicações</span>
-
-                <span style={{ color: 'var(--blue-100)' }}>2 publicações</span>
+                <span style={{ color: 'var(--blue-100)' }}>
+                    {total} publicaçõe{total !== 1 ? 's' : ''}
+                </span>
             </div>
-
-            <div className="text-input">
-                <input type="text" placeholder="Buscar conteúdo" />
-            </div>
+            <input
+                type="text"
+                placeholder="Buscar conteúdo"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+            />
         </div>
     )
 }
 
 export function Post({ issues }: { issues: any[] }) {
+    const navigate = useNavigate();
+
     return (
         <section>
             <div className="posts-line-1">
@@ -105,11 +127,15 @@ export function Post({ issues }: { issues: any[] }) {
                     const timeAgo = rawtimeAgo.charAt(0).toUpperCase() + rawtimeAgo.slice(1);
 
                     return (
-                        <div key={issue.id}>
+                        <div
+                            key={issue.id}
+                            onClick={() => navigate(`/post-one/${issue.number}`)}
+                            style={{ cursor: 'pointer' }}
+                        >
                             <h1>{issue.title}</h1>
                             <p>{preview}</p>
                             <span style={{ color: 'var(--grey-200)', fontSize: '12px' }}>
-                            {timeAgo}
+                                {timeAgo}
                             </span>
                         </div>
                     );
@@ -120,22 +146,31 @@ export function Post({ issues }: { issues: any[] }) {
 }
 
 export function Home() {
-    const [issues, setIssues] = useState([]); // Estado para armazenar as issues
+    const [issues, setIssues] = useState<Issue[]>([]);
+    const [search, setSearch] = useState('');
 
     useEffect(() => {
         async function loadIssues() {
-            const data = await fetchIssues(); // Busca as issues
-            setIssues(data); // Atualiza o estado com as issues
+            const data = await fetchIssues();
+            setIssues(data);
+            console.log(data);
         }
         loadIssues();
     }, []);
+
+    const filteredIssues = issues.filter(issue =>
+        (issue.title || '').toLowerCase().includes(search.toLowerCase()) ||
+        (issue.body || '').toLowerCase().includes(search.toLowerCase()) ||
+        (issue.user?.login || '').toLowerCase().includes(search.toLowerCase()) ||
+        (issue.labels || []).some(label => (label.name || '').toLowerCase().includes(search.toLowerCase()))
+    );
 
     return (
         <>
             <Header />
             <GitInfo />
-            <Search />
-            <Post issues={issues} /> {/* Passa as issues como props */}
+            <Search total={issues.length} search={search} setSearch={setSearch} />
+            <Post issues={filteredIssues} />
         </>
     );
 }
