@@ -16,7 +16,6 @@ type Issue = {
     user: { login: string };
     labels: { name: string }[];
     created_at: string;
-    // adicione outros campos se necessário
 };
 
 export function Header() {
